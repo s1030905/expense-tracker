@@ -1,0 +1,36 @@
+<div style="display: flex; flex-direction:column; align-items:center; margin-top:3rem">
+  <div class="totalAmount">
+    <select style="width:100%">
+      <option value="home">家居物業</option>
+      <option value="transportation">交通出行</option>
+      <option value="entertainment">休閒娛樂</option>
+      <option value="food">餐飲食品</option>
+      <option>其他</option>
+    </select>
+    <h1 style="width:100%; text-align:center; margin-top:1rem">總金額: ${totalAmount}</h1>
+  </div>
+  <ul class="list-group" style="width: 50rem; margin-top:3rem">
+    {{#each record}}
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-auto me-auto">
+          {{!-- <input style="vertical-align: middle;" type="checkbox" name="isDone" {{#if this.isDone}}checked{{/if}}
+            disabled> --}}
+          <h4 style="display:inline; vertical-align: middle;">
+            {{this.name}}
+          </h4>
+          <h5>{{this.date}}</h5>
+        </div>
+        <div class="col-auto">
+          <a class="btn btn-success" href="./record/{{this._id}}/edit">edit</a>
+          <form action="./record/{{this._id}}?_method=DELETE" method="post" style="display:inline">
+            <button class="btn btn-danger" type="" submit>delete</button>
+          </form>
+        </div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+
+  <a href="/record/new" class="btn btn-primary mb-3" style="margin-top:1rem">+</a>
+</div>

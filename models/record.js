@@ -12,6 +12,10 @@ const recordSchema = mongoose.Schema({
     type: Number,
     required: true
   },
+  categoryName: {
+    type: String,
+    required: true
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
