@@ -12,7 +12,7 @@ const recordSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  categoryName: {
+  category: {
     type: String,
     required: true
   },
@@ -20,13 +20,15 @@ const recordSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     index: true,
-    ref: "user"
+    ref: "user",
+    default: '644f278574d2fb63f02a3dda'
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
     index: true,
     required: true,
-    ref: "category"
+    ref: "category",
+    default: '644f278574d2fb63f02a3dda'
   }
 })
 

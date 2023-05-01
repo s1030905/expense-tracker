@@ -14,17 +14,15 @@
     <li class="list-group-item">
       <div class="row">
         <div class="col-auto me-auto">
-          {{!-- <input style="vertical-align: middle;" type="checkbox" name="isDone" {{#if this.isDone}}checked{{/if}}
-            disabled> --}}
           <h4 style="display:inline; vertical-align: middle;">
             {{this.name}}
           </h4>
           <h5>{{this.date}}</h5>
         </div>
         <div class="col-auto">
-          <a class="btn btn-success" href="./record/{{this._id}}/edit">edit</a>
-          <form action="./record/{{this._id}}?_method=DELETE" method="post" style="display:inline">
-            <button class="btn btn-danger" type="" submit>delete</button>
+          <a class="btn btn-success" href="/record/{{this._id}}/edit">Edit</a>
+          <form action="/record/{{this._id}}?_method=DELETE" method="post" style="display:inline">
+            <button class="btn btn-danger" type="" submit>Delete</button>
           </form>
         </div>
       </div>
