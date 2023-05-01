@@ -4,7 +4,7 @@ const db = mongoose.connection
 if (process.env.MONGODB_URI !== "production") {
   require("dotenv").config()
 }
-mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
 db.on("error", () => {
   console.log("db error")
