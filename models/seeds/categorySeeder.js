@@ -8,5 +8,9 @@ db.once("open", () => {
   Category.create({
     name: SEED_Category.name
   })
-  console.log("done")
+    .then(() => {
+      console.log("done")
+      process.exit()
+    })
+    .catch(console.error)
 })

@@ -16,6 +16,10 @@ db.once("open", () => {
     userId: SEED_Record.userId,
     categoryId: SEED_Record.categoryId
   })
-  console.log("done")
+    .then(() => {
+      console.log("done")
+      process.exit()
+    })
+    .catch(console.error)
 })
 

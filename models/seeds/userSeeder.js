@@ -12,6 +12,9 @@ db.once("open", () => {
     email: SEED_USER.email,
     password: SEED_USER.password,
   })
-    .then(() => console.log("done"))
+    .then(() => {
+      console.log("done")
+      process.exit()
+    })
     .catch(console.error)
 })
