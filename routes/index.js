@@ -8,4 +8,5 @@ router.use("/user", user)
 router.use("/record", authenticator, record)
 router.use("/", authenticator, home)
 
+
 module.exports = router

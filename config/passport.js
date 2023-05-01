@@ -1,5 +1,6 @@
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
+const User = require("../models/user")
 
 module.exports = app => {
 
@@ -7,16 +8,15 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
   //-------------------------------------------------LocalStrategy
-  passport.use(new LocalStrategy(
-    function (name, password, done) {
-      User.findOne({ name })
-        .then((user) => {
-          if (!user) { return done(null, false); }
-          if (user.password !== password) { return done(null, false); }
-          return done(null, user);
-        })
-        .catch(console.error)
-    }
+  passport.use(new LocalStrategy(({ usernameField: "email" }), (email, password, done) => {
+    User.findOne({ email })
+      .then((user) => {
+        if (!user) { return done(null, false, { type: "warning_msg", message: "尚未註冊" }) }
+        if (user.password !== password) { return done(null, false, { type: "warning_msg", message: "密碼錯誤" }) }
+        return done(null, user)
+      })
+      .catch(console.error)
+  }
   ));
 
   //-------------------------------------------------serializeUser & deserializeUser
@@ -26,7 +26,7 @@ module.exports = app => {
 
   passport.deserializeUser((id, done) => {
     User.findById(id)
-      .then((user) => done(err, user))
+      .then((user) => done(null, user))
       .catch(console.error)
   });
 }
