@@ -1,0 +1,14 @@
+{
+  "name": "track_money",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon run app.js",
+    "seed": "node models/seeds/categorySeeder.js && node models/seeds/recordSeeder.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
