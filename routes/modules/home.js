@@ -22,38 +22,39 @@ router.get("/:categoryId", (req, res) => {
   let categoryId = req.params.categoryId
   let userId = req.user.id
   let categoryValue = { all: false, home: false, transportation: false, entertainment: false, food: false, other: false }
-  if (categoryId === 0) {
-    categoryValue.all = true
-    console.log(categoryValue)
-    return Record.find({ userId })
-      .lean()
-      .then((record) => {
-        let totalAmount = 0
-        record.forEach((e) => {
-          totalAmount += e.amount
-        })
-        res.render("index", { record, totalAmount, categoryValue })
-      })
-      .catch(console.error)
-  } else {
-    switch (categoryId) {
-      case "1": categoryValue.home = true; break
-      case "2": categoryValue.transportation = true; break
-      case "3": categoryValue.entertainment = true; break
-      case "4": categoryValue.food = true; break
-      case "5": categoryValue.other = true; break
-    }
-    Record.find({ userId, categoryId })
-      .lean()
-      .then((record) => {
-        let totalAmount = 0
-        record.forEach((e) => {
-          totalAmount += e.amount
-        })
-        res.render("index", { record, totalAmount, categoryValue })
-      })
-      .catch(console.error)
+  // if (categoryId === 0) {
+  //   categoryValue.all = true
+  //   console.log(categoryValue)
+  //   return Record.find({ userId })
+  //     .lean()
+  //     .then((record) => {
+  //       console.log(here)
+  //       let totalAmount = 0
+  //       record.forEach((e) => {
+  //         totalAmount += e.amount
+  //       })
+  //       res.render("index", { record, totalAmount, categoryValue })
+  //     })
+  //     .catch(console.error)
+  // } else {
+  switch (categoryId) {
+    case "1": categoryValue.home = true; break
+    case "2": categoryValue.transportation = true; break
+    case "3": categoryValue.entertainment = true; break
+    case "4": categoryValue.food = true; break
+    case "5": categoryValue.other = true; break
   }
+  Record.find({ userId, categoryId })
+    .lean()
+    .then((record) => {
+      let totalAmount = 0
+      record.forEach((e) => {
+        totalAmount += e.amount
+      })
+      res.render("index", { record, totalAmount, categoryValue })
+    })
+    .catch(console.error)
+  // }
 
 
 })

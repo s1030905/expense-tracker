@@ -11,4 +11,5 @@ router.use("/record", authenticator, record)
 router.use("/", authenticator, home)
 
 
+
 module.exports = router
