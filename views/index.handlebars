@@ -15,11 +15,15 @@
     <li class="list-group-item" style="border:0 ;border-bottom: 1px solid rgba(0,0,0,0.25)">
       <div class="row" style="display: flex;align-items: center">
         <div class="col-auto" style="  display: flex;justify-content:space-between;align-items: center;width: 80%;">
-          <div>
-            <h4 style="display:inline; vertical-align: middle;">
-              {{this.name}}
-            </h4>
-            <h5 style="font-size: 0.8rem; margin:0">{{this.date}}</h5>
+          <div style="display: flex; align-items:center">
+            <div class="categoryIcon" style="margin-right: 1rem;">
+            </div>
+            <div>
+              <h4 style="display:inline; vertical-align: middle;" class="categoryName {{this.categoryId}}">
+                {{this.name}}
+              </h4>
+              <h5 style="font-size: 0.8rem; margin:0">{{this.date}}</h5>
+            </div>
           </div>
           <div>
             <h4 style="margin: 0 2rem 0 0;">{{this.amount}}</h4>
@@ -57,4 +61,26 @@
       window.location.href = '/0';
     }
   });
+  const CATEGORY = {
+    家居物業: "https://fontawesome.com/icons/home?style=solid",
+    交通出行: "https://fontawesome.com/icons/shuttle-van?style=solid",
+    休閒娛樂: "https://fontawesome.com/icons/grin-beam?style=solid",
+    餐飲食品: "https://fontawesome.com/icons/utensils?style=solid",
+    其他: "https://fontawesome.com/icons/pen?style=solid"
+  }
+  const categoryName = document.querySelectorAll(".categoryName")
+  const categoryIcon = document.querySelectorAll(".categoryIcon")
+  console.log(categoryIcon[0].innerHTML)
+  for (let i = 0; i < categoryName.length; i++) {
+    //console.log(categoryName[i].classList[1])
+    switch (categoryName[i].classList[1]) {
+      case "1": categoryIcon[i].innerHTML += `<i class="fa-solid fa-house fa-2xl"></i>`; break
+      case "2": categoryIcon[i].innerHTML += `<i class="fa-solid fa-van-shuttle fa-2xl"></i>`; break
+      case "3": categoryIcon[i].innerHTML += `<i class="fa-solid fa-face-grin-beam fa-2xl"></i>`; break
+      case "4": categoryIcon[i].innerHTML += `<i class="fa-solid fa-utensils fa-2xl"></i>`; break
+      case "5": categoryIcon[i].innerHTML += `<i class="fa-solid fa-pen fa-2xl"></i>`; break
+    }
+
+  }
+
 </script>
