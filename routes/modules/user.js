@@ -36,7 +36,7 @@ router.post("/register", (req, res) => {
     errors.push({ message: "密碼與確認密碼不符" })
   }
   if (errors.length) {
-    res.render("register", { name, email, errors })
+    return res.render("register", { name, email, errors })
   }
   User.findOne({ email })
     .then((user) => {
@@ -47,10 +47,8 @@ router.post("/register", (req, res) => {
       return bcrypt.genSalt(10)
         .then((salt) => bcrypt.hash(password, salt))
         .then((hash) => {
-          return User.create({ name, email, password: hash })
-            .then((user) => {
-              res.redirect("/")
-            })
+          User.create({ name, email, password: hash })
+            .then(() => { res.redirect("/") })
             .catch(console.error)
         })
     })

@@ -2,7 +2,8 @@ const router = require("express").Router()
 const Record = require("../../models/record")
 
 router.get("/", (req, res) => {
-  Record.find()
+  let userId = req.user._id
+  Record.find({ userId })
     .lean()
     .then((record) => {
       res.render("index", { record })

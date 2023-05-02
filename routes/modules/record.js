@@ -9,8 +9,9 @@ router.get("/new", (req, res) => {
 
 // ---------------------------------------------------------要調整schema
 router.post("/", (req, res) => {
-  const { name, date, category, amount } = req.body
-  Record.create({ name, date, category, amount })
+  let { name, date, category, amount } = req.body
+  let userId = req.user._id
+  Record.create({ name, date, category, amount, userId })
     .then((record) => {
       res.redirect("/")
     })
