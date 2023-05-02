@@ -44,13 +44,23 @@ router.post("/register", (req, res) => {
         errors.push({ message: "此電子郵件已註冊過" })
         return res.render("register", { name, email, errors })
       }
-      return bcrypt.genSalt(10)
-        .then((salt) => bcrypt.hash(password, salt))
-        .then((hash) => {
-          User.create({ name, email, password: hash })
-            .then(() => { res.redirect("/") })
-            .catch(console.error)
+      return User.collection.countDocuments()
+        .then((count) => {
+          bcrypt.genSalt(10)
+            .then((salt) => bcrypt.hash(password, salt))
+            .then((hash) => {
+              User.create({ name: name, password: hash, email, id: count })
+                .then(() => { res.redirect("/") })
+                .catch(console.error)
+            })
         })
+      // return bcrypt.genSalt(10)
+      //   .then((salt) => bcrypt.hash(password, salt))
+      //   .then((hash) => {
+      //     User.create({ name, email, password: hash })
+      //       .then(() => { res.redirect("/") })
+      //       .catch(console.error)
+      //   })
     })
     .catch(console.error)
 })

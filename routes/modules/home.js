@@ -2,7 +2,7 @@ const router = require("express").Router()
 const Record = require("../../models/record")
 
 router.get("/", (req, res) => {
-  let userId = req.user._id
+  let userId = req.user.id
   Record.find({ userId })
     .lean()
     .then((record) => {

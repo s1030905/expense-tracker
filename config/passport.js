@@ -41,10 +41,13 @@ module.exports = app => {
         .then((user) => {
           if (user) { return done(null, user) }
           let passwordTemp = Math.random().toString(36).slice(-8)
-          bcrypt.genSalt(10)
-            .then((salt) => bcrypt.hash(passwordTemp, salt))
-            .then((hash) => {
-              User.create({ name: name, password: hash, email })
+          User.collection.countDocuments()
+            .then((count) => {
+              bcrypt.genSalt(10)
+                .then((salt) => bcrypt.hash(passwordTemp, salt))
+                .then((hash) => {
+                  User.create({ name: name, password: hash, email, id: count })
+                })
             })
             .then((user) => done(null, user))
             .catch(err => done(err, false))
@@ -54,11 +57,12 @@ module.exports = app => {
 
   //-------------------------------------------------serializeUser & deserializeUser
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    console.log(user)
+    done(null, user._id);
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id)
+    User.findOne({ _id: id })
       .lean()
       .then((user) => done(null, user))
       .catch(console.error)

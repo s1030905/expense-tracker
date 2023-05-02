@@ -1,5 +1,9 @@
 const mongoose = require("mongoose")
 const recordSchema = mongoose.Schema({
+  id: {
+    type: Number,
+    required: true
+  },
   name: {
     type: String,
     required: true
@@ -12,24 +16,19 @@ const recordSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  category: {
-    type: String,
-    required: true
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
+  categoryId: {
+    type: Number,
     required: true,
     index: true,
-    ref: "user",
-    // default: '644f278574d2fb63f02a3dda'
+    ref: "category.id",
   },
-  // categoryId: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   index: true,
-  //   required: true,
-  //   ref: "category",
-  //   // default: '644f278574d2fb63f02a3dda'
-  // }
+  userId: {
+    type: Number,
+    required: true,
+    index: true,
+    ref: "user.id",
+  },
+
 })
 
 module.exports = mongoose.model("record", recordSchema)

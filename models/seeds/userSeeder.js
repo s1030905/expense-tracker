@@ -7,14 +7,21 @@ const SEED_USER = {
 }
 
 db.once("open", () => {
-  User.create({
-    name: SEED_USER.name,
-    email: SEED_USER.email,
-    password: SEED_USER.password,
-  })
-    .then(() => {
-      console.log("done")
-      process.exit()
+  User.collection.countDocuments()
+    .then(n => {
+      console.log(n)
+      return n
     })
+    .then((n) => User.create({
+      id: n,
+      name: SEED_USER.name,
+      email: SEED_USER.email,
+      password: SEED_USER.password,
+    })
+      .then(() => {
+        console.log("done")
+        process.exit()
+      })
+      .catch(console.error))
     .catch(console.error)
 })

@@ -10,12 +10,11 @@ router.get("/new", (req, res) => {
 // ---------------------------------------------------------要調整schema
 router.post("/", (req, res) => {
   let { name, date, category, amount } = req.body
-  let userId = req.user._id
-  Record.create({ name, date, category, amount, userId })
-    .then((record) => {
-      res.redirect("/")
-    })
-    .catch(console.error)
+  let userId = req.user.id
+  Record.collection.countDocuments()
+    .then((count) => Record.create({ name, date, categoryId: category, amount, userId, id: count })
+      .then(() => { res.redirect("/") })
+      .catch(console.error))
 })
 
 // ---------------------------------------------------------edit page
@@ -31,9 +30,9 @@ router.get("/:id/edit", (req, res) => {
 })
 
 router.put("/:id", (req, res) => {
-  let { name, date, category, amount } = req.body
+  let { name, date, categoryId, amount } = req.body
   let id = req.params.id
-  Record.findOneAndUpdate({ _id: id }, { name, date, category, amount })
+  Record.findOneAndUpdate({ _id: id }, { name, date, categoryId, amount })
     .then(() => {
       res.redirect("/")
     })
