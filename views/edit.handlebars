@@ -7,17 +7,18 @@
       </li>
       <li class="form-group mb-3">
         <label for="date">消費日期</label>
-        <input type="date" id="date" name="date" class="form-control" placeholder="消費日期" value="{{date}}" required>
+        <input type="date" id="date" name="date" class="form-control" placeholder="消費日期" value="{{record.date}}"
+          required>
       </li>
       <li class="form-group mb-3">
         <label for="category">消費類別</label>
         <select name="category" id="category" style="width: 100%;" required>
-          <option disabled selected>消費類別</option>
-          <option value="1">家居物業</option>
-          <option value="2">交通出行</option>
-          <option value="3">休閒娛樂</option>
-          <option value="4">餐飲食品</option>
-          <option value="5">其他</option>
+          <option disabled selected>請選擇消費類別</option>
+          <option value="1" {{#if categoryValue.home}}selected{{/if}}> 家居物業 </option>
+          <option value="2" {{#if categoryValue.transportation}}selected{{/if}}>交通出行</option>
+          <option value="3" {{#if categoryValue.entertainment}}selected{{/if}}>休閒娛樂</option>
+          <option value="4" {{#if categoryValue.food}}selected{{/if}}>餐飲食品</option>
+          <option value="5" {{#if categoryValue.other}}selected{{/if}}>其他</option>
         </select>
       </li>
       <li class="form-group mb-3">

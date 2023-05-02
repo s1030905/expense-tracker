@@ -20,19 +20,26 @@ router.post("/", (req, res) => {
 // ---------------------------------------------------------edit page
 router.get("/:id/edit", (req, res) => {
   let id = req.params.id
+  let categoryValue = { home: false, transportation: false, entertainment: false, food: false, other: false }
   Record.findOne({ _id: id })
     .lean()
     .then((record) => {
-      let date = record.date.toISOString().slice(0, 10)
-      res.render("edit", { record, date })
+      switch (record.categoryId) {
+        case 1: categoryValue.home = true; break
+        case 2: categoryValue.transportation = true; break
+        case 3: categoryValue.entertainment = true; break
+        case 4: categoryValue.food = true; break
+        case 5: categoryValue.other = true; break
+      }
+      res.render("edit", { record, categoryValue })
     })
     .catch(console.error)
 })
 
 router.put("/:id", (req, res) => {
-  let { name, date, categoryId, amount } = req.body
+  let { name, date, category, amount } = req.body
   let id = req.params.id
-  Record.findOneAndUpdate({ _id: id }, { name, date, categoryId, amount })
+  Record.findOneAndUpdate({ _id: id }, { name, date, categoryId: category, amount })
     .then(() => {
       res.redirect("/")
     })

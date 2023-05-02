@@ -1,24 +1,29 @@
 <div style="display: flex; flex-direction:column; align-items:center; margin-top:3rem">
   <div class="totalAmount">
-    <select style="width:100%">
-      <option value="0"> 所有支出 </option>
-      <option value="1"> 家居物業 </option>
-      <option value="2">交通出行</option>
-      <option value="3">休閒娛樂</option>
-      <option value="4">餐飲食品</option>
-      <option value="5">其他</option>
+    <select style="width:100%" id="categoryValue">
+      <option value="0" {{#if categoryValue.all}}selected{{/if}}> 所有支出 </option>
+      <option value="1" {{#if categoryValue.home}}selected{{/if}}> 家居物業 </option>
+      <option value="2" {{#if categoryValue.transportation}}selected{{/if}}>交通出行</option>
+      <option value="3" {{#if categoryValue.entertainment}}selected{{/if}}>休閒娛樂</option>
+      <option value="4" {{#if categoryValue.food}}selected{{/if}}>餐飲食品</option>
+      <option value="5" {{#if categoryValue.other}}selected{{/if}}>其他</option>
     </select>
     <h1 style="width:100%; text-align:center; margin-top:1rem">總金額: ${{totalAmount}}</h1>
   </div>
   <ul class="list-group" style="width: 50rem; margin-top:3rem">
     {{#each record}}
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-auto me-auto">
-          <h4 style="display:inline; vertical-align: middle;">
-            {{this.name}}
-          </h4>
-          <h5>{{this.date}}</h5>
+    <li class="list-group-item" style="border:0 ;border-bottom: 1px solid rgba(0,0,0,0.25)">
+      <div class="row" style="display: flex;align-items: center">
+        <div class="col-auto" style="  display: flex;justify-content:space-between;align-items: center;width: 80%;">
+          <div>
+            <h4 style="display:inline; vertical-align: middle;">
+              {{this.name}}
+            </h4>
+            <h5 style="font-size: 0.8rem; margin:0">{{this.date}}</h5>
+          </div>
+          <div>
+            <h4 style="margin: 0 2rem 0 0;">{{this.amount}}</h4>
+          </div>
         </div>
         <div class="col-auto">
           <a class="btn btn-success" href="/record/{{this._id}}/edit">Edit</a>
@@ -33,3 +38,23 @@
 
   <a href="/record/new" class="btn btn-primary mb-3" style="margin-top:1rem">+</a>
 </div>
+
+<script>
+  const categoryValue = document.getElementById('categoryValue');
+  categoryValue.addEventListener('change', (event) => {
+    const value = event.target.value;
+    if (value === '1') {
+      window.location.href = '/1';
+    } else if (value === '2') {
+      window.location.href = '/2';
+    } else if (value === '3') {
+      window.location.href = '/3';
+    } else if (value === '4') {
+      window.location.href = '/4';
+    } else if (value === '5') {
+      window.location.href = '/5';
+    } else if (value === '0') {
+      window.location.href = '/0';
+    }
+  });
+</script>
