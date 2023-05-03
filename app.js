@@ -28,5 +28,5 @@ app.use(setAuthVariablesMiddleware)
 
 app.use(router)
 app.listen(PORT, () => {
-  console.log("http://localhost:3000")
+  console.log(`http://localhost:${PORT}`)
 })
