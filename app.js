@@ -1,5 +1,5 @@
 const express = require("express")
-const PORT = 3000 || process.env.PORT
+const PORT = process.env.PORT || 3000
 const handlebars = require("express-handlebars")
 const session = require("express-session")
 const methodOverride = require("method-override")
