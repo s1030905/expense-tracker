@@ -7,7 +7,6 @@ router.get("/new", (req, res) => {
   res.render("new")
 })
 
-// ---------------------------------------------------------要調整schema
 router.post("/", (req, res) => {
   let { name, date, category, amount } = req.body
   let userId = req.user.id
