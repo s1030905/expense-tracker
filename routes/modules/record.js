@@ -10,10 +10,17 @@ router.get("/new", (req, res) => {
 router.post("/", (req, res) => {
   let { name, date, category, amount } = req.body
   let userId = req.user.id
-  Record.collection.countDocuments()
-    .then((count) => Record.create({ name, date, categoryId: category, amount, userId, id: count })
-      .then(() => { res.redirect("/") })
-      .catch(console.error))
+  if (!category) {
+    req.flash("warning_msg", "請選擇消費類別")
+    res.render("new", { name, date, amount })
+  } else {
+    Record.collection.countDocuments()
+      .then((count) => Record.create({ name, date, categoryId: category, amount, userId, id: count })
+        .then(() => { res.redirect("/") })
+        .catch(console.error))
+  }
+
+
 })
 
 // ---------------------------------------------------------edit page
