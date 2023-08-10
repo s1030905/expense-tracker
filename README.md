@@ -1,5 +1,4 @@
 # expense-tracker
-https://shielded-beach-38891.herokuapp.com
 It's a expense-tracker. You can track your daily expense!
 Support register by FaceBook.
 
